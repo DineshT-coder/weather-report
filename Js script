@@ -4,7 +4,7 @@ const config = {
     wUrl: "https://api.openweathermap.org/data/2.5/",
     wKey: "b3d134b205a02dd2324b79cea375c67e",
   };
-  // get countries
+ 
   
   const getCountries = async (fieldName, ...args) => {
     let apiEndPoint;
@@ -29,7 +29,7 @@ const config = {
     const countries = await response.json();
     return countries;
   };
-  // get weather info
+
   
   const getWeather = async (cityName, ccode, units = "metric") => {
     const apiEndPoint = `${
@@ -113,10 +113,9 @@ const config = {
   const citiesListDropDown = document.querySelector("#citylist");
   const weatherDiv = document.querySelector("#weatherwidget");
   
-  // on content load
   document.addEventListener("DOMContentLoaded", async () => {
     const countries = await getCountries("countries");
-    //console.log(countries);
+    
     let countriesOptions = "";
     if (countries) {
       countriesOptions += `<option value="">Country</option>`;
@@ -127,11 +126,11 @@ const config = {
       countriesListDropDown.innerHTML = countriesOptions;
     }
   
-    // list states
+    
     countriesListDropDown.addEventListener("change", async function () {
       const selectedCountryCode = this.value;
       const states = await getCountries("states", selectedCountryCode);
-      //console.log(states);
+      
       let statesOptions = "";
       if (states) {
         statesOptions += `<option value="">State</option>`;
@@ -143,7 +142,7 @@ const config = {
         citiesListDropDown.innerHTML = "";
       }
     });
-    // list cities
+
     statesListDropDown.addEventListener("change", async function () {
       const selectedCountryCode = countriesListDropDown.value;
       const selectedStateCode = this.value;
@@ -152,7 +151,7 @@ const config = {
         selectedCountryCode,
         selectedStateCode
       );
-      //  console.log(cities);
+     
       let citiesOptions = "";
       if (cities) {
         citiesOptions += `<option value="">City</option>`;
@@ -164,7 +163,7 @@ const config = {
       }
     });
   
-    // select city
+  
     citiesListDropDown.addEventListener("change", async function () {
       const selectedCountryCode = countriesListDropDown.value;
       const selectedCity = this.value;
@@ -173,7 +172,7 @@ const config = {
       displayWeather(weatherInfo);
     });
   
-    // change unit
+  
   
     document.addEventListener("click", async (e) => {
       if (e.target.classList.contains("unitlink")) {
@@ -191,7 +190,7 @@ const config = {
         const weatherTemp = tempCard(weatherInfo.main, unitValue);
         document.querySelector("#tempcard").innerHTML = weatherTemp;
   
-        // active unit
+        
         document.querySelectorAll(".unitlink").forEach((link) => {
           link.classList.remove("active");
         });
