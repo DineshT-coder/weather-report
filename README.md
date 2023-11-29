@@ -1,2 +1,2 @@
-# weather-report
+# weather forecast
 It is a web application 
